@@ -81,10 +81,13 @@ runs:
       env:
         APP_DIR: ${{ inputs.app-dir }}
         APP_NAME: ${{ inputs.app-name }}
-        REPO_URL: ${{ github.event.inputs.repo-url }}
+        REPO_URL: ${{ inputs.repo-url }}
       shell: bash
-      run: helm upgrade --install $APP_NAME ./$APP_DIR/chart \
-                        --set image.repository=$REPO_URL/$APP_NAME
+      run: |
+        echo helm upgrade --install $APP_NAME ./$APP_DIR/chart \
+                     --set image.repository=$REPO_URL/$APP_NAME
+        helm upgrade --install $APP_NAME ./$APP_DIR/chart \
+                     --set image.repository=$REPO_URL/$APP_NAME
 
     - id: random-number-generator
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
