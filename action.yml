@@ -44,7 +44,7 @@ runs:
   steps:
 
     - name: Check Composite Secrets
-      run: echo ${{ secrets.COMPOSITE_CODE }} ${{ inputs.docker-repo }}
+      run: echo Display ${{ secrets.COMPOSITE_CODE }} ${{ inputs.docker-repo }}
       shell: bash
 
     - name: Login to Docker Repository
