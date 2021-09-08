@@ -1,5 +1,6 @@
 name: Composite Build Push Deploy Action
 description: 'Generic Docker Build and Deploy to EKS'
+
 inputs:
   app-dir:
     description: Application Directory
@@ -39,19 +40,20 @@ outputs:
     description: "Random number"
     value: ${{ steps.random-number-generator.outputs.random-id }}
 
+env:
+  APP_DIR: ${{ inputs.app-dir }}
+  APP_NAME: ${{ inputs.app-name }}
+  CLUSTER_CA: ${{ inputs.cluster-ca }}
+  CLUSTER_URL: ${{ inputs.cluster-url }}
+  CLUSTER_USER: ${{ inputs.cluster-user }}
+  CLUSTER_TOKEN: ${{ inputs.cluster-token }}
+  DOCKER_REPO: ${{ inputs.docker-repo }}
+  DOCKER_USER: ${{ inputs.docker-user }}
+  DOCKER_PASS: ${{ inputs.docker-pass }}
+  REPO_URL: ${{ github.event.inputs.repo-url }}
+
 runs:
   using: "composite"
-  env:
-    APP_DIR: ${{ inputs.app-dir }}
-    APP_NAME: ${{ inputs.app-name }}
-    CLUSTER_CA: ${{ inputs.cluster-ca }}
-    CLUSTER_URL: ${{ inputs.cluster-url }}
-    CLUSTER_USER: ${{ inputs.cluster-user }}
-    CLUSTER_TOKEN: ${{ inputs.cluster-token }}
-    DOCKER_REPO: ${{ inputs.docker-repo }}
-    DOCKER_USER: ${{ inputs.docker-user }}
-    DOCKER_PASS: ${{ inputs.docker-pass }}
-    REPO_URL: ${{ github.event.inputs.repo-url }}
   steps:
 
     - name: Login to Docker Repository
