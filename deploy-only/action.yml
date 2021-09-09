@@ -1,0 +1,51 @@
+name: Composite Deploy Action
+description: 'Deploy to EKS'
+
+inputs:
+  app-dir:
+    description: Application Directory
+    required: true
+    default: '.'
+  app-name:
+    description: Application Name
+    required: true
+  cluster-ca:
+    description: Kubernetes Cluster CA
+    required: true
+  cluster-url:
+    description: Kubernetes Cluster URL
+    required: true
+  cluster-user:
+    description: Kubernetes Cluster Username
+    required: true
+  cluster-token:
+    description: Kubernetes Cluster Token
+    required: true
+  repo-url:
+    description: Docker Image Repository URL
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Connect to EKS
+      env:
+        CLUSTER_CA: ${{ inputs.cluster-ca }}
+        CLUSTER_URL: ${{ inputs.cluster-url }}
+        CLUSTER_USER: ${{ inputs.cluster-user }}
+        CLUSTER_TOKEN: ${{ inputs.cluster-token }}
+      run: ${{ github.action_path }}/eks-connect.sh
+      shell: bash
+
+    - name: Helm Upgrade
+      env:
+        APP_DIR: ${{ inputs.app-dir }}
+        APP_NAME: ${{ inputs.app-name }}
+        REPO_URL: ${{ inputs.repo-url }}
+      shell: bash
+      run: |
+        echo helm upgrade --install $APP_NAME ./$APP_DIR/chart \
+                     --set image.repository=$REPO_URL/$APP_NAME
+        helm upgrade --install $APP_NAME ./$APP_DIR/chart \
+                     --set image.repository=$REPO_URL/$APP_NAME
