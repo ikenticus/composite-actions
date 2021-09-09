@@ -62,8 +62,10 @@ runs:
         DOCKER_USER: ${{ inputs.docker-user }}
       run: |
         if [ -z "$DOCKER_REPO" ]; then
+            echo "Docker Hub detected, using DOCKER_USER"
             echo "::set-output name=url::$(echo $DOCKER_USER)"
         else
+            echo "Private repository detected, using DOCKER_REPO"
             echo "::set-output name=url::$(echo $DOCKER_REPO)"
         fi
 
