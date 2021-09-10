@@ -19,6 +19,11 @@ inputs:
     description: Docker Password
     required: true
 
+outputs:
+  digest:
+    description: Digest from Docker Build
+    value: ${{ steps.hash-splitter.outputs.result._1 }}
+
 runs:
   using: "composite"
   steps:
@@ -61,6 +66,8 @@ runs:
         push: true
         tags: ${{ steps.docker-push.outputs.url }}/${{ env.APP_NAME }}:latest
 
-    - id: output-digest
-      run: echo "::set-output name=digest::${{ steps.build-push.outputs.digest }}"
-      shell: bash
+    - id: hash-splitter
+      uses: rishabhgupta/split-by@v1
+      with:
+        string: ${{ steps.build-push.outputs.digest }}
+        split-by: ':'
