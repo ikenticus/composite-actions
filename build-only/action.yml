@@ -22,7 +22,7 @@ inputs:
 outputs:
   digest:
     description: Digest from Docker Build
-    value: ${{ steps.hash-splitter.outputs.result._1 }}
+    value: ${{ steps.hash-splitter.outputs._1 }}
 
 runs:
   using: "composite"
@@ -73,7 +73,5 @@ runs:
         split-by: ':'
     - run: echo ${{ steps.build-push.outputs.digest }}
       shell: bash
-    - run: echo ${{ steps.hash-splitter.outputs.result }}
-      shell: bash
-    - run: echo ${{ steps.hash-splitter.outputs.result._1 }}
+    - run: echo ${{ steps.hash-splitter.outputs._1 }}
       shell: bash
