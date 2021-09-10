@@ -72,5 +72,8 @@ runs:
         string: ${{ steps.build-push.outputs.digest }}
         split-by: ':'
     - run: echo ${{ steps.build-push.outputs.digest }}
+      shell: bash
     - run: echo ${{ steps.hash-splitter.outputs.result }}
+      shell: bash
     - run: echo ${{ steps.hash-splitter.outputs.result._1 }}
+      shell: bash
