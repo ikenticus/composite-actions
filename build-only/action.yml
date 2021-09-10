@@ -50,7 +50,7 @@ runs:
         fi
 
     - name: Build and push
-      id: docker_build
+      id: build-push
       uses: docker/build-push-action@v2
       env:
         APP_DIR: ${{ inputs.app-dir }}
@@ -60,3 +60,7 @@ runs:
         file: ${{ env.APP_DIR }}/Dockerfile
         push: true
         tags: ${{ steps.docker-push.outputs.url }}/${{ env.APP_NAME }}:latest
+
+    - id: output-digest
+      run: echo "::set-output name=digest::${{ steps.build-push.outputs.digest }}"
+      shell: bash
