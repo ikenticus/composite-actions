@@ -16,3 +16,11 @@ runs:
 
     - run: echo ${{ steps.git-ref.outputs._2 }}
       shell: bash
+
+    - name: Extract PR from GHA Environment
+      id: pull-id
+      run: echo "::set-output name=pr-id::$(jq --raw-output '.pull_request.number // 0' \"$GITHUB_EVENT_PATH\")"
+
+    - run: |
+        echo ${{ env.GITHUB_EVENT_PATH }}
+        echo ${{ steps.pull-id.outputs.pr-id }}
