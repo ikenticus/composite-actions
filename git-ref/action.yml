@@ -14,13 +14,30 @@ runs:
         string: ${{ github.ref }}
         split-by: '/'
 
-    - run: echo ${{ steps.git-ref.outputs._2 }}
-      shell: bash
+    - shell: bash
+      run: |
+        echo ${{ steps.git-ref.outputs._2 }}
+        env | sort -u
 
     - name: Extract PR from GHA Environment
       id: pull-id
-      run: echo "::set-output name=pr-id::$(jq --raw-output '.pull_request.number // 0' \"$GITHUB_EVENT_PATH\")"
+      shell: bash
+      run: echo "::set-output name=pr-id::$(jq --raw-output '.pull_request.number // 0' $GITHUB_EVENT_PATH)"
 
-    - run: |
-        echo ${{ env.GITHUB_EVENT_PATH }}
-        echo ${{ steps.pull-id.outputs.pr-id }}
+    - name: GitHub Event Path
+      shell: bash
+      run: |
+        echo $GITHUB_EVENT_PATH
+        cat $GITHUB_EVENT_PATH
+
+    - name: Extracted PR
+      shell: bash
+      run: echo ${{ steps.pull-id.outputs.pr-id }}
+
+    - name: Event PR JSON
+      shell: bash
+      run: echo '${{ toJson(github.event.pull_request) }}'
+
+    - name: PR Number
+      shell: bash
+      run: echo ${{ github.event.pull_request.number }}
