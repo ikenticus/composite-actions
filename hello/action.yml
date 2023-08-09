@@ -1,0 +1,15 @@
+name: Composite Hello Action
+description: 'Generic Hello'
+
+inputs:
+  name:
+    description: Name
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Greet Person
+      shell: bash
+      run: |
+        echo "Hello, ${{ inputs.name }}"

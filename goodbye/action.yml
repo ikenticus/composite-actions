@@ -1,0 +1,15 @@
+name: Composite Goodbye Action
+description: 'Generic Goodbye'
+
+inputs:
+  name:
+    description: Name
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Greet Person
+      shell: bash
+      run: |
+        echo "Goodbye, ${{ inputs.name }}"
