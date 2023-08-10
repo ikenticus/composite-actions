@@ -14,9 +14,3 @@ runs:
       run: |
         echo "Goodbye, ${{ inputs.name }}"
 
-    # Secrets fail for composite, but work for private
-    - name: Pull Secret
-      shell: bash
-      run: |
-        echo "Using ${{ secrets.CLUSTER_NAME }}"
-
