@@ -77,7 +77,7 @@ jobs:
       #     python-version: '3.11'
 
       - name: Install Python Dependencies
-        run: pip install -y requests
+        run: pip install requests
         shell: bash
           
       - name: Run Python
