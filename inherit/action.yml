@@ -2,7 +2,7 @@ name: Inheritance without Inputs
 description: 'Inheritance - Composite'
 
 runs:
-  using: "composite"
+  # using: "composite"
   steps:
     - name: Environment
       shell: bash
@@ -12,5 +12,5 @@ runs:
     - name: Pull Secret
       shell: bash
       run: |
-        echo "Using ${{ secrets.CLUSTER_NAME }}"
+        echo "Using ${{ secrets.CLUSTER_USER }}"
 
