@@ -6,9 +6,12 @@ description: 'Inheritance - Referenced Workflows'
 # -> "ikenticus/composite-actions/.github/workflows/inherit.yaml@master" (source branch with sha:db308d6e7971ff04fd773ea43a96ec2710593df2)
 # : No event triggers defined in `on`
 on:
-  workflow_dispatch:
+  # workflow_dispatch:
+  #   branches: [ main ]
+  # : workflow is not reusable as it is missing a `on.workflow_call` trigger
+  workflow_call:
     branches: [ main ]
-
+ 
 runs:
   steps:
     - name: Environment
