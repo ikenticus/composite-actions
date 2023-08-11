@@ -27,7 +27,7 @@ jobs:
       - name: Environment
         # shell: bash
         run: |
-          echo "${DESC:-Hostile} Environment"
+          echo "${{ env.DESC }} Environment"
 
       - name: Pull Secret
         # shell: bash
