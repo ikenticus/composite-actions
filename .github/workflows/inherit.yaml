@@ -63,6 +63,7 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: ikenticus/composite-actions
+          ref: main
 
       - name: Check Files After
         run: ls -laR
