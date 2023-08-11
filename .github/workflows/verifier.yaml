@@ -75,5 +75,7 @@ jobs:
         run: |
           import os
           print(os.environ['PATH'])
-          print requests.get("https://www.google.com").json()
+
+          from pprint import pprint
+          pprint(requests.get("https://www.google.com").json())
         shell: python
