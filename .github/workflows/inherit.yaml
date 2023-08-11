@@ -14,6 +14,11 @@ on:
   workflow_call:
     # branches: [ main ]
     # : Unexpected value 'branches'
+    inputs:
+      description:
+        default: Hostile
+        required: false
+        type: string
 
 # : No jobs defined in `jobs`
 jobs:
@@ -31,6 +36,10 @@ jobs:
           echo "Working in ${{ github.action_path }} within ${{ github.workspace }}"
           echo "Using ${{ github.event.pull_request.title }}"
 
+      - name: Github Inputs
+        run: |
+          echo "This is ${{ inputs.description }} Input"
+  
       - name: Environment
         # shell: bash
         run: |
