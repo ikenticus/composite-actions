@@ -47,8 +47,13 @@ jobs:
       - name: Check Files Before
         run: ls -laR
 
-      - name: Check Out Repo
-        uses: actions/checkout@v3
+      # - name: Check Out Repo
+      #   uses: actions/checkout@v3
+
+      - name: Check Out Shared Repo
+        uses: actions/checkout@master
+        with:
+          repository: ikenticus/composite-actions
 
       - name: Check Files After
         run: ls -laR
