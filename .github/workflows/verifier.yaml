@@ -53,23 +53,23 @@ jobs:
         run: |
           echo "Using ${{ secrets.CLUSTER_USER }}"
 
-      - name: Check Files Before
-        run: ls -laR
+      # - name: Check Files Before
+      #   run: ls -laR
 
       # - name: Check Out Repo
       #   uses: actions/checkout@v3
 
-      - name: Check Out Shared Repo
-        uses: actions/checkout@master
-        with:
-          repository: ikenticus/composite-actions
-          ref: main
+      # - name: Check Out Shared Repo
+      #   uses: actions/checkout@master
+      #   with:
+      #     repository: ikenticus/composite-actions
+      #     ref: main
 
-      - name: Check Files After
-        run: ls -laR
+      # - name: Check Files After
+      #   run: ls -laR
 
-      - name: Reference File from Shared Repo
-        run: cat ./.github/workflows/inherit.txt
+      # - name: Reference File from Shared Repo
+      #   run: cat ./.github/workflows/inherit.txt
 
       - name: Display the path
         run: |
