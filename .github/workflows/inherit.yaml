@@ -28,12 +28,13 @@ jobs:
         # shell: bash
         run: |
           echo "Detected ${{ github.event_name }}"
-          echo "Working in ${{ github.action_path }}"
+          echo "Working in ${{ github.action_path }} within ${{ github.workspace }}"
           echo "Using ${{ github.event.pull_request.title }}"
 
       - name: Environment
         # shell: bash
         run: |
+          echo "Event $GITHUB_EVENT_NAME in progress"
           echo "Seeking ${DESC:-Hostile} Environment"
           echo "Must find ${{ env.DESC }} Environment"
           echo "Wound up in $DESC Environment"
