@@ -1,8 +1,0 @@
-Without steps, jobs seems to be able to reference another org/repo/workflow/file.yaml
-Working:
-- Secrets
-- Github Variables
-Failing:
-- Passing env
-- github.action_path
-
