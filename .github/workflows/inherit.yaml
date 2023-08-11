@@ -24,10 +24,17 @@ jobs:
         shell: bash
 
     steps:
+      - name: Github Variables
+        # shell: bash
+        run: |
+          echo "Detected ${{ github.event_name }}"
+          echo "Working in ${{ github.action_path }}"
+          echo "Using ${{ github.event.pull_request.title }}"
+
       - name: Environment
         # shell: bash
         run: |
-          echo "Seeking ${{DESC:-Hostile} Environment"
+          echo "Seeking ${DESC:-Hostile} Environment"
           echo "Must find ${{ env.DESC }} Environment"
           echo "Wound up in $DESC Environment"
 
