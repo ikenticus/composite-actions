@@ -1,0 +1,78 @@
+name: Inheritance without Inputs
+
+# description: 'Inheritance - Referenced Workflows'
+# : Unexpected value 'description' 
+
+# error parsing called workflow
+# ".github/workflows/inherit-values.yml"
+# -> "ikenticus/composite-actions/.github/workflows/inherit.yaml@master" (source branch with sha:db308d6e7971ff04fd773ea43a96ec2710593df2)
+# : No event triggers defined in `on`
+on:
+  # workflow_dispatch:
+  #   branches: [ main ]
+  # : workflow is not reusable as it is missing a `on.workflow_call` trigger
+  workflow_call:
+    # branches: [ main ]
+    # : Unexpected value 'branches'
+    inputs:
+      description:
+        default: Hostile
+        required: false
+        type: string
+
+# : No jobs defined in `jobs`
+jobs:
+  inheritance:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Github Variables
+        # shell: bash
+        run: |
+          echo "Detected ${{ github.event_name }}"
+          echo "Working in ${{ github.action_path }} within ${{ github.workspace }}"
+          echo "Using ${{ github.event.pull_request.title }}"
+
+      - name: Github Inputs
+        run: |
+          echo "This is ${{ inputs.description }} Input"
+  
+      - name: Environment
+        # shell: bash
+        run: |
+          echo "Event $GITHUB_EVENT_NAME in progress"
+          echo "Seeking ${DESC:-Hostile} Environment"
+          echo "Must find ${{ env.DESC }} Environment"
+          echo "Wound up in $DESC Environment"
+
+      - name: Pull Secret
+        # shell: bash
+        run: |
+          echo "Using ${{ secrets.CLUSTER_USER }}"
+
+      - name: Check Files Before
+        run: ls -laR
+
+      # - name: Check Out Repo
+      #   uses: actions/checkout@v3
+
+      - name: Check Out Shared Repo
+        uses: actions/checkout@master
+        with:
+          repository: ikenticus/composite-actions
+          ref: main
+
+      - name: Check Files After
+        run: ls -laR
+
+      - name: Reference File from Shared Repo
+        run: cat ./.github/workflows/inherit.txt
+
+      - name: Display the path
+        run: |
+          import os
+          print(os.environ['PATH'])
+        shell: python
