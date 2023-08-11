@@ -1,0 +1,15 @@
+name: Inheritance without Inputs
+description: 'Inheritance - Referenced Workflows'
+
+runs:
+  steps:
+    - name: Environment
+      shell: bash
+      run: |
+        echo "${DESC:-Hostile} Environment"
+
+    - name: Pull Secret
+      shell: bash
+      run: |
+        echo "Using ${{ secrets.CLUSTER_USER }}"
+
