@@ -76,15 +76,19 @@ jobs:
       #   with:
       #     python-version: '3.11'
 
-      - name: Install Python Dependencies
-        run: pip install requests
-        shell: bash
+      # - name: Install Python Dependencies
+      #   run: pip install requests
+      #   shell: bash
           
       - name: Run Python
         run: |
+          import sys
+          print(sys.version)
+          
           import os
           print(os.environ['PATH'])
 
+          import requests
           from pprint import pprint
           pprint(requests.get("https://www.google.com").json())
         shell: python
