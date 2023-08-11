@@ -25,11 +25,11 @@ jobs:
 
     steps:
       - name: Environment
-        shell: bash
+        # shell: bash
         run: |
           echo "${DESC:-Hostile} Environment"
 
       - name: Pull Secret
-        shell: bash
+        # shell: bash
         run: |
           echo "Using ${{ secrets.CLUSTER_USER }}"
