@@ -11,16 +11,24 @@ on:
   # : workflow is not reusable as it is missing a `on.workflow_call` trigger
   workflow_call:
     branches: [ main ]
- 
-runs:
-  steps:
-    - name: Environment
-      shell: bash
-      run: |
-        echo "${DESC:-Hostile} Environment"
 
-    - name: Pull Secret
-      shell: bash
-      run: |
-        echo "Using ${{ secrets.CLUSTER_USER }}"
+# : No jobs defined in `jobs`
+
+jobs:
+  inheritance:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Environment
+        shell: bash
+        run: |
+          echo "${DESC:-Hostile} Environment"
+
+      - name: Pull Secret
+        shell: bash
+        run: |
+          echo "Using ${{ secrets.CLUSTER_USER }}"
 
