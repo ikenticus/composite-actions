@@ -1,6 +1,14 @@
 name: Inheritance without Inputs
 description: 'Inheritance - Referenced Workflows'
 
+# error parsing called workflow
+# ".github/workflows/inherit-values.yml"
+# -> "ikenticus/composite-actions/.github/workflows/inherit.yaml@master" (source branch with sha:db308d6e7971ff04fd773ea43a96ec2710593df2)
+# : No event triggers defined in `on`
+on:
+  workflow_dispatch:
+    branches: [ main ]
+
 runs:
   steps:
     - name: Environment
