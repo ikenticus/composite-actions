@@ -84,11 +84,11 @@ jobs:
         run: |
           import sys
           print(sys.version)
-          
+
           import os
           print(os.environ['PATH'])
 
           import requests
           from pprint import pprint
-          pprint(requests.get("https://www.google.com").json())
+          pprint(requests.get("https://www.google.com"))
         shell: python
